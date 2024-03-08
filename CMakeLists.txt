@@ -18,15 +18,19 @@ if (NOT ELEMENTS_BUILD_EXAMPLES)
    add_subdirectory(${ELEMENTS_ROOT} elements)
 endif()
 
-set(ELEMENTS_APP_PROJECT "EmptyStarter")
-set(ELEMENTS_APP_TITLE "Empty Starter")
-set(ELEMENTS_APP_COPYRIGHT "Copyright (c) 2016-2023 Joel de Guzman")
-set(ELEMENTS_APP_ID "com.cycfi.empty-starter")
+set(ELEMENTS_APP_PROJECT "Daily-Task-Manager")
+set(ELEMENTS_APP_TITLE "Daily Task Manager")
+set(ELEMENTS_APP_COPYRIGHT "Copyright (c) 2016-2023 Thomas Stephens")
+set(ELEMENTS_APP_ID "com.MrT-Stephens.Daily-Task-Manager")
 set(ELEMENTS_APP_VERSION "1.0")
 
 set(ELEMENTS_APP_SOURCES 
 	"${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"
-	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Vector.h")
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Vector.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Algorithm.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Xml.h"
+
+	"${CMAKE_CURRENT_SOURCE_DIR}/Source Files/Xml.cpp")
 
 # For your custom application icon on macOS or Windows see cmake/AppIcon.cmake module
 include(AppIcon)
