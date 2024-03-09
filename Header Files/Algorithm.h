@@ -1,7 +1,9 @@
+#define NODISCARD [[nodiscard]]
+
 namespace mrt
 {
     template <typename _Iter>
-    _Iter Find(_Iter first, _Iter last, const typename _Iter::ValueType& value)
+    NODISCARD _Iter Find(_Iter first, _Iter last, const typename _Iter::ValueType& value)
     {
         for (; first != last; first++)
         {
@@ -15,7 +17,21 @@ namespace mrt
     }
 
     template <typename _Iter>
-    _Iter FindIf(_Iter first, _Iter last, bool (*predicate)(const typename _Iter::ValueType&))
+    NODISCARD _Iter Find(_Iter first, _Iter last, const typename _Iter::value_type& value)
+    {
+        for (; first != last; first++)
+        {
+            if (*first == value)
+            {
+                return first;
+            }
+        }
+
+        return last;
+    }
+
+    template <typename _Iter>
+    NODISCARD _Iter FindIf(_Iter first, _Iter last, bool (*predicate)(const typename _Iter::ValueType&))
     {
         for (; first != last; first++)
         {
@@ -29,18 +45,30 @@ namespace mrt
     }
 
     template <typename _Iter>
-    typename _Iter::ValueType Accumulate(_Iter first, _Iter last, typename _Iter::ValueType init)
+    NODISCARD _Iter FindIf(_Iter first, _Iter last, bool (*predicate)(const typename _Iter::value_type&))
     {
         for (; first != last; first++)
         {
-            init += *first;
+            if (predicate(*first))
+            {
+                return first;
+            }
         }
 
-        return init;
+        return last;
     }
 
     template <typename _Iter>
     void ForEach(_Iter first, _Iter last, void (*func)(typename _Iter::ValueType&))
+    {
+        for (; first != last; first++)
+        {
+            func(*first);
+        }
+    }
+
+    template <typename _Iter>
+    void ForEach(_Iter first, _Iter last, void (*func)(typename _Iter::value_type&))
     {
         for (; first != last; first++)
         {
@@ -65,5 +93,66 @@ namespace mrt
                 }
             }
         }
+    }
+
+    template <typename _Iter>
+    void Sort(_Iter first, _Iter last, bool (*compare)(const typename _Iter::value_type&, const typename _Iter::value_type&)
+        = [](const typename _Iter::value_type& a, const typename _Iter::value_type& b)
+        {
+            return a < b;
+        }
+    ) {
+        for (auto it = first; it != last; it++)
+        {
+            for (auto it2 = first; it2 != last; it2++)
+            {
+                if (compare(*it, *it2))
+                {
+                    std::swap(*it, *it2);
+                }
+            }
+        }
+    }
+
+    template <typename _Iter>
+    NODISCARD _Iter RemoveIf(_Iter first, _Iter last, bool (*predicate)(const typename _Iter::value_type&))
+    {
+        _Iter result = first;
+
+        for (; first != last; ++first)
+        {
+            if (!predicate(*first))
+            {
+                if (result != first)
+                {
+                    *result = std::move(*first);
+                }
+
+                ++result;
+            }
+        }
+
+        return result;
+    }
+
+    template <typename _Iter>
+    NODISCARD _Iter RemoveIf(_Iter first, _Iter last, bool (*predicate)(const typename _Iter::ValueType&))
+    {
+        _Iter result = first;
+
+        for (; first != last; ++first)
+        {
+            if (!predicate(*first))
+            {
+                if (result != first)
+                {
+                    *result = std::move(*first);
+                }
+
+                ++result;
+            }
+        }
+
+        return result;
     }
 }

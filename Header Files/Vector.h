@@ -1,6 +1,6 @@
-#include <iostream>
+#pragma once
+
 #include <cstdint>
-#include <vector>
 
 #define NODISCARD [[nodiscard]]
 
@@ -421,6 +421,36 @@ namespace mrt
             Erase(position - cbegin());
         }
 
+        void Erase(Iterator first, Iterator last)
+		{
+			SizeType count = last - first;
+
+			for (SizeType i = 0; i < count; i++)
+			{
+				Erase(first);
+			}
+		}
+
+        void Erase(ConstIterator first, ConstIterator last)
+		{
+            SizeType count = last - first;
+
+            for (SizeType i = 0; i < count; i++)
+            {
+                Erase(first);
+            }
+        }
+
+        NODISCARD _Type& Back()
+        {
+			return m_Data[m_Size - 1];
+		}
+
+        NODISCARD const _Type& Back() const
+		{
+            return m_Data[m_Size - 1];
+		}
+
         template <typename... _Args>
         void Emplace(Iterator position, _Args... args)
         {
@@ -498,6 +528,26 @@ namespace mrt
         NODISCARD Iterator end()
         {
             return Iterator(m_Data + m_Size);
+        }
+
+        NODISCARD Iterator begin() const
+        {
+            return Iterator(m_Data);
+        }
+
+        NODISCARD Iterator end() const
+        {
+            return Iterator(m_Data + m_Size);
+        }
+
+        NODISCARD ConstIterator cbegin()
+        {
+            return ConstIterator(m_Data);
+        }
+
+        NODISCARD ConstIterator cend()
+        {
+            return ConstIterator(m_Data + m_Size);
         }
 
         NODISCARD ConstIterator cbegin() const
