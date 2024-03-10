@@ -26,11 +26,21 @@ set(ELEMENTS_APP_VERSION "1.0")
 
 set(ELEMENTS_APP_SOURCES 
 	"${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/NoCopy.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Vector.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Algorithm.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Xml.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/View.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Controller.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Observer.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Subject.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Task.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/TaskManager.h"
 
-	"${CMAKE_CURRENT_SOURCE_DIR}/Source Files/Xml.cpp")
+	"${CMAKE_CURRENT_SOURCE_DIR}/Source Files/Xml.cpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Source Files/View.cpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Source Files/Controller.cpp"
+)
 
 # For your custom application icon on macOS or Windows see cmake/AppIcon.cmake module
 include(AppIcon)
