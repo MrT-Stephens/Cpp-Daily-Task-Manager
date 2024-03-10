@@ -21,4 +21,6 @@ public:
 	void Init();
 
 	void OnClose();
+
+	void OnAddTask(const Task& task);
 };

@@ -16,6 +16,23 @@ Controller::Controller(int argc, char* argv[], std::string name, std::string id)
 
 void Controller::Init()
 {
+	m_TaskManager->Attach(m_CurrentView.get());
+
+	m_CurrentView->OnAddTaskClick = [this](const Task& task) 
+		{
+			m_TaskManager->AddTask(task);
+		};
+
+	m_CurrentView->OnRemoveTaskClick = [this](const std::string& title)
+		{
+			m_TaskManager->RemoveTask(title);
+		};
+
+	m_CurrentView->OnCheckTaskClick = [this](const std::string& title, bool checked)
+		{
+			m_TaskManager->CompleteTask(title, checked);
+		};
+
 	m_CurrentView->InitView();
 
 	this->run();
@@ -23,5 +40,7 @@ void Controller::Init()
 
 void Controller::OnClose()
 {
+	m_TaskManager->Detach(m_CurrentView.get());
+
 	this->stop();
 }

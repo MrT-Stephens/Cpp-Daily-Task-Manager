@@ -45,7 +45,7 @@ public:
 		Notify();
 	}
 
-    void CompleteTask(const std::string& task_name)
+    void CompleteTask(const std::string& task_name, bool completed)
     {
         auto task = mrt::FindIf(m_Tasks.begin(), m_Tasks.end(), [task_name](const Task& task)->bool
 			{
@@ -54,7 +54,7 @@ public:
 
         if (task != m_Tasks.end())
 		{
-			task->is_done = true;
+			task->is_done = completed;
 			Notify();
 		}
     }

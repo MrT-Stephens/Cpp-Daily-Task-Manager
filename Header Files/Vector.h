@@ -334,7 +334,7 @@ namespace mrt
                 Reserve(m_Capacity * 2);
             }
 
-            m_Data[m_Size++] = value;
+            new (&m_Data[m_Size++]) _Type(value);
         }
 
         template <typename... _Args>

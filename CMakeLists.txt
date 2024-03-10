@@ -25,7 +25,7 @@ set(ELEMENTS_APP_ID "com.MrT-Stephens.Daily-Task-Manager")
 set(ELEMENTS_APP_VERSION "1.0")
 
 set(ELEMENTS_APP_SOURCES 
-	"${CMAKE_CURRENT_SOURCE_DIR}/main.cpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Main.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/NoCopy.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Vector.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Algorithm.h"

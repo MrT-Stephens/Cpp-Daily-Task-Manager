@@ -3,7 +3,7 @@
 
 int main(int argc, char* argv[])
 {
-	Controller ctrl(argc, argv, "", "");
+	Controller ctrl(argc, argv, "Daily Task Manager", "com.MrT-Stephens.Daily-Task-Manager");
 
 	ctrl.Init();
 
