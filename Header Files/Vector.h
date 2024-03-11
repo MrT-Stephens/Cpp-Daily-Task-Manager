@@ -254,7 +254,7 @@ namespace mrt
 
             for (SizeType i = 0; i < m_Size; i++)
             {
-                m_Data[i] = other.m_Data[i];
+                new(&m_Data[i]) _Type(other.m_Data[i]);
             }
         }
 
@@ -276,7 +276,7 @@ namespace mrt
 
                 for (SizeType i = 0; i < other.m_Size; i++)
                 {
-                    m_Data[i] = other.m_Data[i];
+                    new(&m_Data[i]) _Type(other.m_Data[i]);
                 }
 
                 other.m_Data = nullptr;

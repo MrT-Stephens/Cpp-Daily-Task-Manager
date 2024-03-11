@@ -25,6 +25,11 @@ set(ELEMENTS_APP_ID "com.MrT-Stephens.Daily-Task-Manager")
 set(ELEMENTS_APP_VERSION "1.0")
 
 set(ELEMENTS_APP_SOURCES 
+	"${CMAKE_CURRENT_SOURCE_DIR}/lib/easy-encryption/Base64.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/lib/easy-encryption/Base64.cpp"
+	"${CMAKE_CURRENT_SOURCE_DIR}/lib/easy-encryption/encryption.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/lib/easy-encryption/vigenere.h"
+
 	"${CMAKE_CURRENT_SOURCE_DIR}/Main.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/NoCopy.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Vector.h"
@@ -36,6 +41,8 @@ set(ELEMENTS_APP_SOURCES
 	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Subject.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Task.h"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/TaskManager.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/Storage.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Header Files/StorageEncrypted.h"
 
 	"${CMAKE_CURRENT_SOURCE_DIR}/Source Files/Xml.cpp"
 	"${CMAKE_CURRENT_SOURCE_DIR}/Source Files/View.cpp"

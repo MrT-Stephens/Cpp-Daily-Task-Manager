@@ -15,9 +15,15 @@ public:
 	check_task_click_func OnCheckTaskClick;
 
 private:
-    std::shared_ptr<cycfi::elements::window> m_MainWindow;
 	cycfi::elements::color m_BackgroundColor;
-	cycfi::elements::indirect<cycfi::elements::shared_element<cycfi::elements::element>> m_TasksElements{ cycfi::elements::share(cycfi::elements::label("No Tasks Added.")) };
+	cycfi::elements::indirect<cycfi::elements::shared_element<cycfi::elements::element>> m_TasksElements
+		{ 
+			cycfi::elements::share(
+				cycfi::elements::label_with_font_size(
+					cycfi::elements::label("No Tasks are added!"), 25.0f
+				)
+			)
+		};
 
 	std::string m_NewTaskTitle;
 	std::string m_NewTaskDescription;

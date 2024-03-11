@@ -4,16 +4,30 @@
 #include "../Header Files/Observer.h"
 #include "../Header Files/Vector.h"
 #include "../Header Files/Algorithm.h"
+#include "../Header Files/StorageEncrypted.h"
 
-class TaskManager : public Subject {
+class TaskManager : public Subject, private NoCopy 
+{
 private:
     mrt::Vector<Observer*> m_Observers;
     mrt::Vector<Task> m_Tasks;
-
 public:
+    TaskManager()
+    {
+        StorageEncrypted s(std::make_shared<Storage>());
+        s.Read(std::to_string(typeid(this).hash_code()), m_Tasks);
+    }
+
+    ~TaskManager()
+	{
+        StorageEncrypted s(std::make_shared<Storage>());
+		s.Write(std::to_string(typeid(this).hash_code()), m_Tasks);
+	}
+
     void Attach(Observer* observer) override 
     {
         m_Observers.PushBack(observer);
+        Notify();
     }
 
     void Detach(Observer* observer) override 
