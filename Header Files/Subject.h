@@ -2,6 +2,9 @@
 
 #include "../Header Files/Observer.h"
 
+/// <summary>
+/// The Subject interface declares a set of methods for managing subscribers.
+/// </summary>
 class Subject 
 {
 public:

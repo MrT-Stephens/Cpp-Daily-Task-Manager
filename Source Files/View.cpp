@@ -1,22 +1,33 @@
 #include "../Header Files/View.h"
 
+/// <summary>
+/// Initializes a new instance of the <see cref="View"/> class.
+/// </summary>
+/// <param name="main_window"> The main window. </param>
+/// <param name="background_color"> The background color. </param>
 View::View(std::shared_ptr<cycfi::elements::window> main_window, const cycfi::elements::color& background_color)
 	: cycfi::elements::view(*main_window.get()), m_BackgroundColor(background_color)
 {
 
 }
 
+/// <summary>
+/// Initializes all the UI elements for the view.
+/// </summary>
 void View::InitView()
 {
 	auto add_button = cycfi::elements::button("Add Task", 1.2f);
 
+	// Add task button click event
 	add_button.on_click = [this](bool)
 		{
+			// New task input fields
 			auto title_input = cycfi::elements::input_box();
 			auto description_input = cycfi::elements::input_box();
 			auto start_time_input = cycfi::elements::input_box();
 			auto end_time_input = cycfi::elements::input_box();
 
+			// Text changed events for input fields
 			title_input.second->on_text = [this, title_ptr = title_input.second.get()](std::string_view str)
 				{
 					m_NewTaskTitle = str;
@@ -41,6 +52,7 @@ void View::InitView()
 					end_time_ptr->value(cycfi::to_utf32(str));
 				};
 
+			// The UI elements for the popup
 			auto popup = cycfi::elements::dialog1(*this,
 				cycfi::elements::htile(
 					cycfi::elements::vtile(
@@ -86,9 +98,11 @@ void View::InitView()
 				}, "Add Task"
 			);
 
+			// Open the popup
 			cycfi::elements::open_popup(popup, *this);
 		};
 
+	// The main UI elements of the view.
 	this->content(
 		cycfi::elements::pane(
 			cycfi::elements::htile(
@@ -119,8 +133,15 @@ void View::InitView()
 	);
 }
 
+/// <summary>
+/// Updates the view with the given tasks.
+/// This is inherited from the observer interface.
+/// </summary>
+/// <param name="tasks"> The tasks. </param>
 void View::Update(const mrt::Vector<Task>& tasks)
 {
+	// The task display works by creating a cell composer function for each task.
+	// This will then be called internally by the vlist class.
 	auto&& cell_composer_func = [this, &tasks](uint64_t index)
 		{
 			auto check_box = cycfi::elements::check_box("");
@@ -200,6 +221,7 @@ void View::Update(const mrt::Vector<Task>& tasks)
 			);
 		};
 
+	// If there are no tasks, display a message.
 	if (tasks.Empty())
 	{
 		m_TasksElements =
@@ -224,5 +246,6 @@ void View::Update(const mrt::Vector<Task>& tasks)
 		);
 	}
 
+	// Update the view with the new tasks.
 	this->layout(m_TasksElements);
 }

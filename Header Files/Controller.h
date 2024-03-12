@@ -4,6 +4,10 @@
 #include "../Header Files/View.h"
 #include "../Header Files/TaskManager.h"
 
+/// <summary>
+/// The Controller class is the main class for the application. 
+/// It is responsible for managing the application's views and tasks.
+/// </summary>
 class Controller : public cycfi::elements::app, private NoCopy
 {
 private:
@@ -21,6 +25,4 @@ public:
 	void Init();
 
 	void OnClose();
-
-	void OnAddTask(const Task& task);
 };

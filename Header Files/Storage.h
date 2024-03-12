@@ -8,16 +8,30 @@
 
 #include <filesystem>
 
+/// <summary>
+/// Storage class is responsible for reading and writing tasks to a file.
+/// It uses the XML library to read and write tasks to a file.
+/// </summary>
 class Storage : private NoCopy
 {
 private:
 	std::string m_CurrentDirectory;
 public:
+	/// <summary>
+	/// Default constructor that sets the current directory to the current working directory.
+	/// </summary>
 	Storage() 
 		: m_CurrentDirectory(std::filesystem::current_path().string())
 	{
 	}
 
+	/// <summary>
+	/// Writes the tasks to a file.
+	/// Uses the XML library to write the tasks to a file.
+	/// </summary>
+	/// <param name="file_name"> The name of the file to write to. </param>
+	/// <param name="tasks"> The tasks to write to the file. </param>
+	/// <returns> True if the tasks were written to the file, false otherwise. </returns>
 	virtual bool Write(const std::string& file_name, const mrt::Vector<Task>& tasks)
 	{
 		mrt::XML_Node root("daily-tasks");
@@ -42,6 +56,13 @@ public:
 		return (doc.WriteDocument(m_CurrentDirectory + "\\" + file_name + ".xml", doc) == mrt::XML_Document_FileError::SUCCESS) ? true : false;
 	}
 
+	/// <summary>
+	/// Reads the tasks from a file.
+	/// Uses the XML library to read the tasks from a file.
+	/// </summary>
+	/// <param name="file_name"> The name of the file to read from. </param>
+	/// <param name="tasks"> The tasks to read from the file. </param>
+	/// <returns> True if the tasks were read from the file, false otherwise. </returns>
 	virtual bool Read(const std::string& file_name, mrt::Vector<Task>& tasks)
 	{
 		mrt::XML_Document doc;

@@ -1,5 +1,13 @@
 #include "../Header Files/Controller.h"
 
+/// <summary>
+/// Initializes a new instance of the <see cref="Controller"/> class.
+/// Will initialize all the necessary components for the application to run.
+/// </summary>
+/// <param name="argc"> The argc. </param>
+/// <param name="argv"> The argv. </param>
+/// <param name="name"> The name. </param>
+/// <param name="id"> The identifier. </param>
 Controller::Controller(int argc, char* argv[], std::string name, std::string id)
 	: cycfi::elements::app(argc, argv, name, id)
 {
@@ -14,6 +22,11 @@ Controller::Controller(int argc, char* argv[], std::string name, std::string id)
 		};
 }
 
+/// <summary>
+/// Initializes everything for the application to run.
+/// Will attach the view to the task manager and initialize the view.
+/// Will also set the event handlers for the view.
+/// </summary>
 void Controller::Init()
 {
 	m_TaskManager->Attach(m_CurrentView.get());
@@ -38,6 +51,11 @@ void Controller::Init()
 	this->run();
 }
 
+/// <summary>
+/// Called when the window is closed.
+/// Will detach the view from the task manager and stop the application.
+/// Will also call the base class stop method.
+/// </summary>
 void Controller::OnClose()
 {
 	m_TaskManager->Detach(m_CurrentView.get());

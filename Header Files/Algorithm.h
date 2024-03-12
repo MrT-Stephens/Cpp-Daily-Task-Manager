@@ -2,6 +2,14 @@
 
 namespace mrt
 {
+    /// <summary>
+    /// Find the first occurrence of a value in a range.
+    /// </summary>
+    /// <typeparam name="_Iter"> Iterator type. </typeparam>
+    /// <param name="first"> Iterator to the first element of the range. </param>
+    /// <param name="last"> Iterator to the last element of the range. </param>
+    /// <param name="value"> Value to find. </param>
+    /// <returns> Iterator to the first occurrence of the value. </returns>
     template <typename _Iter>
     NODISCARD _Iter Find(_Iter first, _Iter last, const typename _Iter::ValueType& value)
     {
@@ -16,6 +24,15 @@ namespace mrt
         return last;
     }
 
+    /// <summary>
+    /// Find the first occurrence of a value in a range. Using a lambda function to compare.
+    /// </summary>
+    /// <typeparam name="_Iter"> Iterator type. </typeparam>
+    /// <typeparam name="_Predicate"> Predicate type. </typeparam>
+    /// <param name="first"> Iterator to the first element of the range. </param>
+    /// <param name="last"> Iterator to the last element of the range. </param>
+    /// <param name="predicate"> Lambda function to compare. </param>
+    /// <returns> Iterator to the first occurrence of the value. </returns>
     template <typename _Iter, typename _Predicate>
     NODISCARD _Iter FindIf(_Iter first, _Iter last, _Predicate predicate)
     {
@@ -30,6 +47,13 @@ namespace mrt
         return last;
     }
 
+    /// <summary>
+    /// Loop through a range and execute a function for each element.
+    /// </summary>
+    /// <typeparam name="_Iter"> Iterator type. </typeparam>
+    /// <param name="first"> Iterator to the first element of the range. </param>
+    /// <param name="last"> Iterator to the last element of the range. </param>
+    /// <param name="func"> Function to execute. </param>
     template <typename _Iter>
     void ForEach(_Iter first, _Iter last, void (*func)(typename _Iter::ValueType&))
     {
@@ -39,6 +63,13 @@ namespace mrt
         }
     }
 
+    /// <summary>
+    /// Sorts a range using a lambda function to compare.
+    /// </summary>
+    /// <typeparam name="_Iter"> Iterator type. </typeparam>
+    /// <param name="first"> Iterator to the first element of the range. </param>
+    /// <param name="last"> Iterator to the last element of the range. </param>
+    /// <param name="compare"> Lambda function to compare. </param>
     template <typename _Iter>
     void Sort(_Iter first, _Iter last, bool (*compare)(const typename _Iter::ValueType&, const typename _Iter::ValueType&)
         = [](const typename _Iter::ValueType& a, const typename _Iter::ValueType& b)
@@ -58,6 +89,16 @@ namespace mrt
         }
     }
 
+    /// <summary>
+    /// Reworks a range to remove all elements that satisfy a predicate. 
+    /// All elements that satisfy the predicate are moved to the end of the range.
+    /// A new iterator to the end of the range is returned.
+    /// </summary>
+    /// <typeparam name="_Iter"> Iterator type. </typeparam>
+    /// <param name="first"> Iterator to the first element of the range. </param>
+    /// <param name="last"> Iterator to the last element of the range. </param>
+    /// <param name="predicate"> Lambda function to compare. </param>
+    /// <returns> Iterator to the end of the range. </returns>
     template <typename _Iter>
     NODISCARD _Iter RemoveIf(_Iter first, _Iter last, bool (*predicate)(const typename _Iter::ValueType&))
     {

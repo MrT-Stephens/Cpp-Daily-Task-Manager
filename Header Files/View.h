@@ -3,6 +3,10 @@
 #include "../Header Files/NoCopy.h"
 #include "../Header Files/Observer.h"
 
+/// <summary>
+/// The View class is responsible for the visual representation of the application.
+/// It will also handle the user input and notify the controller about the user's actions.
+/// </summary>
 class View : public cycfi::elements::view, private NoCopy, public Observer
 {
 public:
