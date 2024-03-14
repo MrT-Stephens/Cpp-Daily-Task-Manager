@@ -31,8 +31,8 @@ private:
 
 	std::string m_NewTaskTitle;
 	std::string m_NewTaskDescription;
-	std::string m_NewTaskStartTime;
-	std::string m_NewTaskEndTime;
+	std::pair<std::string, std::string> m_NewTaskStartTime;
+	std::pair<std::string, std::string> m_NewTaskEndTime;
 public:
 	View(std::shared_ptr<cycfi::elements::window> main_window, const cycfi::elements::color& background_color);
 

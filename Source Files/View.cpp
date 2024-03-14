@@ -21,11 +21,87 @@ void View::InitView()
 	// Add task button click event
 	add_button.on_click = [this](bool)
 		{
+			auto GenerateHoursDropdown = [](auto func)
+				{
+					auto Hours = {
+						"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
+						"12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"
+					};
+
+					auto button = cycfi::elements::button_menu("Hour");
+
+					cycfi::elements::vtile_composite hours_dropdown;
+
+					for (auto&& hour : Hours)
+					{
+						auto item = cycfi::elements::share(
+							cycfi::elements::menu_item(hour)
+						);
+
+						item->on_click = [hr = hour, func]()
+							{
+								func(hr);
+							};
+
+						hours_dropdown.push_back(item);
+					}
+
+					button.menu(cycfi::elements::layer(
+						cycfi::elements::vsize(150,
+							cycfi::elements::vscroller(
+								hours_dropdown
+							)
+						),
+						cycfi::elements::panel{}
+					));
+
+					return button;
+				};
+
+			auto GenerateMinutesDropdown = [](auto func)
+				{
+					auto Minutes = {
+						"00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
+						"10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
+						"20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
+						"30", "31", "32", "33", "34", "35", "36", "37", "38", "39",
+						"40", "41", "42", "43", "44", "45", "46", "47", "48", "49",
+						"50", "51", "52", "53", "54", "55", "56", "57", "58", "59"
+					};
+
+					auto button = cycfi::elements::button_menu("Minute");
+
+					cycfi::elements::vtile_composite minutes_dropdown;
+
+					for (auto&& minute : Minutes)
+					{
+						auto item = cycfi::elements::share(
+							cycfi::elements::menu_item(minute)
+						);
+
+						item->on_click = [min = minute, func]()
+							{
+								func(min);
+							};
+
+						minutes_dropdown.push_back(item);
+					}
+
+					button.menu(cycfi::elements::layer(
+						cycfi::elements::vsize(150,
+							cycfi::elements::vscroller(
+								minutes_dropdown
+							)
+						),
+						cycfi::elements::panel{}
+					));
+
+					return button;
+				};
+
 			// New task input fields
 			auto title_input = cycfi::elements::input_box();
 			auto description_input = cycfi::elements::input_box();
-			auto start_time_input = cycfi::elements::input_box();
-			auto end_time_input = cycfi::elements::input_box();
 
 			// Text changed events for input fields
 			title_input.second->on_text = [this, title_ptr = title_input.second.get()](std::string_view str)
@@ -38,18 +114,6 @@ void View::InitView()
 				{
 					m_NewTaskDescription = str;
 					description_ptr->value(cycfi::to_utf32(str));
-				};
-
-			start_time_input.second->on_text = [this, start_time_ptr = start_time_input.second.get()](std::string_view str)
-				{
-					m_NewTaskStartTime = str;
-					start_time_ptr->value(cycfi::to_utf32(str));
-				};
-
-			end_time_input.second->on_text = [this, end_time_ptr = end_time_input.second.get()](std::string_view str)
-				{
-					m_NewTaskEndTime = str;
-					end_time_ptr->value(cycfi::to_utf32(str));
 				};
 
 			// The UI elements for the popup
@@ -76,7 +140,19 @@ void View::InitView()
 							cycfi::elements::vtile(
 								cycfi::elements::align_left(cycfi::elements::label("Task Start Time")),
 								cycfi::elements::hsize(200.0f,
-									start_time_input.first
+									cycfi::elements::htile(
+										GenerateHoursDropdown([this](std::string hour)
+											{
+												m_NewTaskStartTime.first = hour.c_str();
+											}),
+										cycfi::elements::margin({ 5, 0, 5, 0 },
+											cycfi::elements::label(":")
+										),
+										GenerateMinutesDropdown([this](std::string minute)
+											{
+												m_NewTaskStartTime.second = minute.c_str();
+											})
+									)
 								)
 							)
 						),
@@ -84,7 +160,19 @@ void View::InitView()
 							cycfi::elements::vtile(
 								cycfi::elements::align_left(cycfi::elements::label("Task End Time")),
 								cycfi::elements::hsize(200.0f,
-									end_time_input.first
+									cycfi::elements::htile(
+										GenerateHoursDropdown([this](std::string hour)
+											{
+												m_NewTaskEndTime.first = hour.c_str();
+											}),
+										cycfi::elements::margin({ 5, 0, 5, 0 },
+											cycfi::elements::label(":")
+										),
+										GenerateMinutesDropdown([this](std::string minute)
+											{
+												m_NewTaskEndTime.second = minute.c_str();
+											})
+									)
 								)
 							)
 						)
@@ -93,7 +181,13 @@ void View::InitView()
 				{
 					if (!m_NewTaskTitle.empty() && !m_NewTaskDescription.empty())
 					{
-						OnAddTaskClick({ m_NewTaskTitle, m_NewTaskDescription, m_NewTaskStartTime, m_NewTaskEndTime, false });
+						OnAddTaskClick({ 
+							m_NewTaskTitle, 
+							m_NewTaskDescription, 
+							m_NewTaskStartTime.first + ":" + m_NewTaskStartTime.second,
+							m_NewTaskEndTime.first + ":" + m_NewTaskEndTime.second,
+							false 
+							});
 					}
 				}, "Add Task"
 			);
