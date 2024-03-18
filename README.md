@@ -10,7 +10,8 @@
 <p align="center">
   <a href="#key-features">Key Features</a> ▪︎
   <a href="#installation">Installation</a> ▪︎ 
-  <a href="#libraries-used">Libraries Used</a>
+  <a href="#libraries-used">Libraries Used</a> ▪︎ 
+  <a href="#license">License</a>
 </p>
 
 <div align="center">
@@ -43,3 +44,27 @@ $ cd Cpp-Drawing-Application
 
 * [Elements](https://github.com/cycfi/elements): Used for creating the cross-platform GUI application.
 * [Easy Encryption](https://github.com/philipperemy/easy-encryption): Used for encrypting/decrypting the data from files.
+
+## License
+
+MIT License
+
+Copyright (c) 2024 Thomas Stephens
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
