@@ -27,7 +27,7 @@
 
 ## Installation
 
-To clone and run this application, you'll need [Git](https://git-scm.com). You will then need to run the commands shown below:
+To clone and run this application, you'll need [Git](https://git-scm.com). You will then need to run the commands shown below. You must use a recursive clone when cloning the repository, as the GUI library is added as a submodule.
 
 ```bash
 # Clone this repository
